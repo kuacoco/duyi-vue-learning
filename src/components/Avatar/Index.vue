@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'AvatarImg',
+  name: 'Avatar',
   props: {
     url: {
       type: String,
@@ -16,16 +16,15 @@ export default {
 
 <template>
   <img
-    class="avatar-img"
+    class="avatar-container"
     :src="url"
-    :width="size"
     :style="{ width: size + 'px', height: size + 'px' }"
     alt="avatar"
   />
 </template>
 
 <style scoped>
-.avatar-img {
+.avatar-container {
   display: block;
   object-fit: cover;
   border-radius: 50%;

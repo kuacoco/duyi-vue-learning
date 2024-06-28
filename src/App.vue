@@ -1,23 +1,23 @@
 <script>
-import AvatarImg from '@/components/AvatarImg.vue'
-import IconImg from '@/components/IconImg.vue'
+import Avatar from '@/components/Avatar/Index.vue'
+import Icon from '@/components/Icon/Index.vue'
 
 export default {
   name: 'App',
   components: {
-    AvatarImg,
-    IconImg
+    Avatar,
+    Icon
   }
 }
 </script>
 
 <template>
-  <AvatarImg url="https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar8.jpg" :size="100" />
-  <IconImg type="home" />
+  <Avatar url="https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar8.jpg" :size="100" />
+  <Icon type="qq" />
 </template>
 
 <style scoped>
-.iconfont {
+.icon-container {
   color: aquamarine;
   font-size: 26px;
 }

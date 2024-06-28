@@ -20,7 +20,7 @@ const classMap = {
 }
 
 export default {
-  name: 'IconImg',
+  name: 'Icon',
   props: {
     type: {
       type: String,
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <template>
-  <i class="iconfont" :class="fontClass"></i>
+  <i class="iconfont icon-container" :class="fontClass"></i>
 </template>
 
 <style scoped>
