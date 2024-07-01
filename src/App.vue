@@ -1,6 +1,6 @@
 <script>
-import Avatar from '@/components/Avatar/Index.vue'
-import Icon from '@/components/Icon/Index.vue'
+import Avatar from '@/components/Avatar.vue'
+import Icon from '@/components/Icon.vue'
 
 export default {
   name: 'App',
