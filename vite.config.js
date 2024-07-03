@@ -5,12 +5,26 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true
+      }
+    }
+  },
   plugins: [
-    vue(),
+    vue()
   ],
   resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
+    alias: [
+      {
+        find: '@',
+        replacement: fileURLToPath(new URL('./src', import.meta.url))
+      },
+      {
+        find: /^~@/,
+        replacement: fileURLToPath(new URL('./src', import.meta.url))
+      }
+    ]
   }
 })
