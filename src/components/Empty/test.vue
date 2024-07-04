@@ -5,12 +5,12 @@
 </template>
 
 <script>
-import Empty from "./";
+import Empty from './'
 export default {
   components: {
-    Empty,
-  },
-};
+    Empty
+  }
+}
 </script>
 
 <style>

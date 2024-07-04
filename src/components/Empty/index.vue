@@ -6,23 +6,23 @@
 </template>
 
 <script>
-import Icon from "../Icon.vue";
+import Icon from '../Icon.vue'
 export default {
   components: {
-    Icon,
+    Icon
   },
   props: {
     text: {
       type: String,
-      default: "无数据",
-    },
-  },
-};
+      default: '无数据'
+    }
+  }
+}
 </script>
 
 <style scoped lang="less">
-@import "~@/styles/mixin.less";
-@import "~@/styles/var.less";
+@import '~@/styles/mixin.less';
+@import '~@/styles/var.less';
 .empty-container {
   .self-center();
   color: @gray;
