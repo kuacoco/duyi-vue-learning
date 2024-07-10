@@ -25,7 +25,7 @@ export default {
       228847758
     </a>
     <a class="qrcode-hover">
-      <Icon type="chat" />
+      <Icon type="weixin" />
       kuacoco
       <div class="qrcode-container">
         <img src="@/assets/qrcode.png" alt="" />
@@ -45,6 +45,7 @@ a {
   cursor: pointer;
   column-gap: 4px;
   line-height: 1.6;
+  padding: 4px 12px;
 }
 
 .qrcode-hover {
