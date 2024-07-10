@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import Icon from '@/components/Icon'
+import Icon from '@/components/Icon/index.vue'
 export default {
   components: {
     Icon

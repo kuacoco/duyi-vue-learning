@@ -9,9 +9,9 @@
 </template>
 
 <script>
-import Avatar from '@/components/Avatar'
-import Menu from './Menu'
-import Contact from './Contact'
+import Avatar from '@/components/Avatar/index.vue'
+import Menu from './Menu/index.vue'
+import Contact from './Contact/index.vue'
 export default {
   components: {
     Avatar,
