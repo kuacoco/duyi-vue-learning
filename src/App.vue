@@ -4,6 +4,7 @@ import Icon from '@/components/Icon.vue'
 import Pager from '@/components/Pager.vue'
 import Empty from '@/components/Empty.vue'
 import ImageLoader from '@/components/ImageLoader.vue'
+import Contact from '@/components/Contact.vue'
 
 export default {
   name: 'App',
@@ -12,7 +13,8 @@ export default {
     Icon,
     Pager,
     Empty,
-    ImageLoader
+    ImageLoader,
+    Contact,
   },
   data: function () {
     return {
@@ -32,6 +34,7 @@ export default {
 </script>
 
 <template>
+  <Contact />
   <Avatar url="https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar8.jpg" :size="100" />
   <Icon type="qq" />
   <Pager :current="current" :total="128" :limit="10" :visibleNumber="5" @page-change="pageChange" />
@@ -51,5 +54,9 @@ export default {
 .icon-container {
   color: aquamarine;
   font-size: 26px;
+}
+
+.contact-container {
+  background-color: #4b4b4b;
 }
 </style>
