@@ -14,7 +14,7 @@ export default {
     Pager,
     Empty,
     ImageLoader,
-    Contact,
+    Contact
   },
   data: function () {
     return {

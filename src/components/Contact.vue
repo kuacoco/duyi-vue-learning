@@ -17,8 +17,9 @@ export default {
       <Icon type="mail" />
       kuacoco@gmail.com
     </a>
-    <a class="qrcode-hover"
-      href="tencent://message/?Menu=yes&uin=228847758&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45">
+    <a
+      class="qrcode-hover" href="tencent://message/?Menu=yes&uin=228847758&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45"
+    >
       <Icon type="qq" />
       228847758
     </a>
