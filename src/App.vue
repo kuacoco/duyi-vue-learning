@@ -3,6 +3,7 @@ import Avatar from '@/components/Avatar.vue'
 import Icon from '@/components/Icon.vue'
 import Pager from '@/components/Pager.vue'
 import Empty from '@/components/Empty.vue'
+import ImageLoader from '@/components/ImageLoader.vue'
 
 export default {
   name: 'App',
@@ -10,16 +11,21 @@ export default {
     Avatar,
     Icon,
     Pager,
-    Empty
+    Empty,
+    ImageLoader
   },
-  data: function () {
+  data: function() {
     return {
       current: 1
     }
   },
   methods: {
-    pageChange: function (page) {
+    pageChange: function(page) {
       this.current = page
+    },
+
+    loaded: function() {
+      console.log('img components loaded')
     }
   }
 }
@@ -34,6 +40,11 @@ export default {
   >
     <Empty />
   </div>
+  <ImageLoader
+    src="https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?fit=crop&crop=entropy&w=3456&h=2304"
+    placeholder="https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?w=100"
+    @load="loaded"
+  />
 </template>
 
 <style scoped>
