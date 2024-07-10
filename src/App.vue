@@ -5,6 +5,7 @@ import Pager from '@/components/Pager.vue'
 import Empty from '@/components/Empty.vue'
 import ImageLoader from '@/components/ImageLoader.vue'
 import Contact from '@/components/Contact.vue'
+import Menu from '@/components/Menu.vue'
 
 export default {
   name: 'App',
@@ -14,7 +15,8 @@ export default {
     Pager,
     Empty,
     ImageLoader,
-    Contact
+    Contact,
+    Menu
   },
   data: function () {
     return {
@@ -34,6 +36,7 @@ export default {
 </script>
 
 <template>
+  <Menu />
   <Contact />
   <Avatar url="https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar8.jpg" :size="100" />
   <Icon type="qq" />
