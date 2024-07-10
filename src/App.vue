@@ -14,17 +14,17 @@ export default {
     Empty,
     ImageLoader
   },
-  data: function() {
+  data: function () {
     return {
       current: 1
     }
   },
   methods: {
-    pageChange: function(page) {
+    pageChange: function (page) {
       this.current = page
     },
 
-    loaded: function() {
+    loaded: function () {
       console.log('img components loaded')
     }
   }

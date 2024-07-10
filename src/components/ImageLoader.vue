@@ -19,13 +19,13 @@ export default {
   data() {
     return {
       loaded: false,
-      everythingDone: false,
+      everythingDone: false
     }
   },
   methods: {
     onload: function () {
       this.loaded = true
-      setTimeout(()=> {
+      setTimeout(() => {
         this.everythingDone = true
         this.$emit('load')
       }, this.duration)
