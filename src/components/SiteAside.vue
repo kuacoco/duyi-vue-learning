@@ -12,31 +12,38 @@ export default {
 <template>
   <div class="site-aside-container">
     <Avatar url="https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar8.jpg" :size="150" />
+    <h1 class="title">CC的小窝</h1>
     <Menu />
     <Contact />
-    <div class="record">黑ICP备17001719</div>
+    <p class="footer">黑ICP备17001719</p>
   </div>
 </template>
 
-<style scoped>
-.avatar-container {
-  margin: 10px auto;
-}
-
-.menu-container,
-.contact-container,
-.record {
-  margin: 20px 0;
-}
+<style scoped lang="less">
+@import '~@/styles/var.less';
 
 .site-aside-container {
-  background: #4b4b4b;
-  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background: @dark;
+  padding: 20px 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
-.record {
+.avatar-container {
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 1.2em;
+  color: #fff;
   text-align: center;
-  font-size: 0.8em;
-  color: #666;
+}
+
+.footer {
+  font-size: 12px;
+  text-align: center;
 }
 </style>

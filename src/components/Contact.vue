@@ -25,7 +25,7 @@ export default {
       228847758
     </a>
     <a class="qrcode-hover">
-      <Icon type="weixin" />
+      <Icon type="weixin" class="wx-icon" />
       kuacoco
       <div class="qrcode-container">
         <img src="@/assets/qrcode.png" alt="" />
@@ -34,50 +34,66 @@ export default {
   </div>
 </template>
 
-<style scoped>
-.icon-container {
-  font-size: 20px;
-}
+<style scoped lang="less">
+@import '~@/styles/var.less';
 
-a {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  column-gap: 4px;
-  line-height: 1.6;
-  padding: 4px 12px;
+.contact-container {
+  color: @gray;
+  padding: 20px;
+  font-size: 14px;
+
+  a {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    column-gap: 10px;
+    height: 30px;
+    margin: 14px 0;
+
+    .icon-container {
+      font-size: 26px;
+    }
+
+    .wx-icon {
+      font-size: 32px;
+      text-indent: -3px;
+    }
+  }
 }
 
 .qrcode-hover {
   position: relative;
 }
 
-.qrcode-hover .qrcode-container {
-  position: absolute;
-  left: calc(50% - 100px);
-  bottom: 32px;
-  transform: scaleY(0);
-  transform-origin: bottom;
-  transition: transform 0.2s;
-}
+.qrcode-hover {
+  .qrcode-container {
+    position: absolute;
+    left: 0;
+    bottom: 32px;
+    transform: scaleY(0);
+    transform-origin: center bottom;
+    transition: transform 0.3s;
+    border-radius: 5px;
+    padding: 10px 15px;
+    background-color: #fff;
+    img {
+      width: 150px;
+      height: 150px;
+    }
+    &::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      position: absolute;
+      transform: translateX(-50%) rotate(45deg);
+      background: #fff;
+      left: 50%;
+      bottom: -4px;
+    }
+  }
 
-.qrcode-hover:hover .qrcode-container {
-  transform: scaleY(1);
-}
-
-.qrcode-hover .qrcode-container img {
-  width: 200px;
-  height: 200px;
-}
-
-.qrcode-container::after {
-  content: '';
-  width: 10px;
-  height: 10px;
-  position: absolute;
-  top: 190px;
-  transform: translateY(5px) rotate(45deg);
-  background: #fff;
-  left: calc(50% - 5px);
+  &:hover .qrcode-container {
+    transform: scaleY(1);
+  }
 }
 </style>

@@ -4,11 +4,13 @@ import Pager from '@/components/Pager.vue'
 import Empty from '@/components/Empty.vue'
 import ImageLoader from '@/components/ImageLoader.vue'
 import SiteAside from '@/components/SiteAside.vue'
+import SiteAsideT from '@/components/SiteAside/index.vue'
 
 export default {
   name: 'App',
   components: {
     SiteAside,
+    SiteAsideT,
     Icon,
     Pager,
     Empty,
@@ -32,32 +34,21 @@ export default {
 </script>
 
 <template>
-  <SiteAside />
-  <Icon type="qq" />
-  <Pager :current="current" :total="128" :limit="10" :visibleNumber="5" @page-change="pageChange" />
-  <div
-    style="background-color: antiquewhite; border: 1px solid #dc6a12; height: 500px; width: 500px"
-  >
-    <Empty />
+  <div class="container">
+    <SiteAsideT />
+    <SiteAside />
   </div>
-  <ImageLoader
-    src="https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?fit=crop&crop=entropy&w=3456&h=2304"
-    placeholder="https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?w=100"
-    @load="loaded"
-  />
 </template>
 
 <style scoped>
-.icon-container {
-  color: aquamarine;
-  font-size: 26px;
-}
-
-.contact-container {
-  background-color: #4b4b4b;
+.container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  overflow: scroll;
 }
 
 .site-aside-container {
-  width: 200px;
+  flex: 1;
 }
 </style>
