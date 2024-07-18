@@ -3,6 +3,7 @@ import Icon from '@/components/Icon.vue'
 import Pager from '@/components/Pager.vue'
 import PagerT from '@/components/Pager/index.vue'
 import Empty from '@/components/Empty.vue'
+import EmptyT from '@/components/Empty/index.vue'
 import ImageLoader from '@/components/ImageLoader.vue'
 import SiteAside from '@/components/SiteAside.vue'
 import SiteAsideT from '@/components/SiteAside/index.vue'
@@ -16,6 +17,7 @@ export default {
     Pager,
     PagerT,
     Empty,
+    EmptyT,
     ImageLoader
   },
   data: function () {
@@ -39,8 +41,14 @@ export default {
   <div class="container">
     <!--    <SiteAsideT />-->
     <!--    <SiteAside />-->
-    <Pager :total="128" :current="current" @page-change="pageChange" />
-    <PagerT :total="128" :current="current" @page-change="pageChange" />
+    <!--    <Pager :total="128" :current="current" @page-change="pageChange" />-->
+    <!--    <PagerT :total="128" :current="current" @page-change="pageChange" />-->
+    <div class="wrapper">
+      <Empty />
+    </div>
+    <div class="wrapper">
+      <EmptyT />
+    </div>
   </div>
 </template>
 
@@ -53,6 +61,11 @@ export default {
 }
 
 .site-aside-container {
+  flex: 1;
+}
+
+.wrapper {
+  position: relative;
   flex: 1;
 }
 </style>

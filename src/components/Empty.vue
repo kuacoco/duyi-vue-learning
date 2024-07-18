@@ -16,19 +16,21 @@ export default {
 <template>
   <div class="empty-container">
     <Icon type="empty" />
-    <div>{{ text }}</div>
+    <p>{{ text }}</p>
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="less">
+@import '~@/styles/mixin.less';
+@import '~@/styles/var.less';
+
 .empty-container {
-  width: 100px;
+  .self-center();
   text-align: center;
-  margin: 0 auto;
+  color: @gray;
 }
 
 .icon-container {
-  font-size: 100px;
-  color: var(--vt-c-text-light-2);
+  font-size: 72px;
 }
 </style>
