@@ -42,8 +42,8 @@ export default {
 
 <template>
   <div class="pager-container">
-    <a v-show="current > 1" @click="$emit('pageChange', 1)">|<<</a>
-    <a v-show="current > 1" @click="$emit('pageChange', current - 1)"><<</a>
+    <a :class="{ disabled: current === 1 }" @click="$emit('pageChange', 1)">|<<</a>
+    <a :class="{ disabled: current === 1 }" @click="$emit('pageChange', current - 1)"><<</a>
     <a
       v-for="(page, i) in pageNumbers"
       :key="i"
@@ -52,18 +52,38 @@ export default {
     >
       {{ page }}
     </a>
-    <a v-show="current < maxPageNumber" @click="$emit('pageChange', current + 1)">>></a>
-    <a v-show="current < maxPageNumber" @click="$emit('pageChange', maxPageNumber)">>>|</a>
+    <a :class="{ disabled: current === maxPageNumber }" @click="$emit('pageChange', current + 1)"
+      >>></a
+    >
+    <a :class="{ disabled: current === maxPageNumber }" @click="$emit('pageChange', maxPageNumber)"
+      >>>|</a
+    >
   </div>
 </template>
 
-<style scoped>
-.pager-container > a {
-  cursor: pointer;
-}
+<style scoped lang="less">
+@import '../styles/var.less';
 
-.pager-container > a.active {
-  font-weight: bold;
-  color: #4b4b4b;
+.pager-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+
+  a {
+    color: @primary;
+    cursor: pointer;
+    margin: 0 6px;
+
+    &.active {
+      font-weight: bold;
+      color: @words;
+      cursor: text;
+    }
+
+    &.disabled {
+      color: @lightWords;
+      cursor: not-allowed;
+    }
+  }
 }
 </style>

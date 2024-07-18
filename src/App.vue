@@ -1,6 +1,7 @@
 <script>
 import Icon from '@/components/Icon.vue'
 import Pager from '@/components/Pager.vue'
+import PagerT from '@/components/Pager/index.vue'
 import Empty from '@/components/Empty.vue'
 import ImageLoader from '@/components/ImageLoader.vue'
 import SiteAside from '@/components/SiteAside.vue'
@@ -13,6 +14,7 @@ export default {
     SiteAsideT,
     Icon,
     Pager,
+    PagerT,
     Empty,
     ImageLoader
   },
@@ -35,8 +37,10 @@ export default {
 
 <template>
   <div class="container">
-    <SiteAsideT />
-    <SiteAside />
+    <!--    <SiteAsideT />-->
+    <!--    <SiteAside />-->
+    <Pager :total="128" :current="current" @page-change="pageChange" />
+    <PagerT :total="128" :current="current" @page-change="pageChange" />
   </div>
 </template>
 
