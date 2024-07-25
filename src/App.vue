@@ -1,71 +1,38 @@
 <script>
-import Icon from '@/components/Icon.vue'
-import Pager from '@/components/Pager.vue'
-import PagerT from '@/components/Pager/index.vue'
-import Empty from '@/components/Empty.vue'
-import EmptyT from '@/components/Empty/index.vue'
-import ImageLoader from '@/components/ImageLoader.vue'
+import Layout from '@/components/Layout.vue'
 import SiteAside from '@/components/SiteAside.vue'
-import SiteAsideT from '@/components/SiteAside/index.vue'
 
 export default {
   name: 'App',
   components: {
     SiteAside,
-    SiteAsideT,
-    Icon,
-    Pager,
-    PagerT,
-    Empty,
-    EmptyT,
-    ImageLoader
-  },
-  data: function () {
-    return {
-      current: 1
-    }
-  },
-  methods: {
-    pageChange: function (page) {
-      this.current = page
-    },
-
-    loaded: function () {
-      console.log('img components loaded')
-    }
+    Layout
   }
 }
 </script>
 
 <template>
-  <div class="container">
-    <!--    <SiteAsideT />-->
-    <!--    <SiteAside />-->
-    <!--    <Pager :total="128" :current="current" @page-change="pageChange" />-->
-    <!--    <PagerT :total="128" :current="current" @page-change="pageChange" />-->
-    <div class="wrapper">
-      <Empty />
-    </div>
-    <div class="wrapper">
-      <EmptyT />
-    </div>
+  <div class="app-container">
+    <Layout>
+      <template #left>
+        <div class="aside">
+          <SiteAside />
+        </div>
+      </template>
+      <div>主区域，宽度占满剩余空间，溢出隐藏</div>
+    </Layout>
   </div>
 </template>
 
-<style scoped>
-.container {
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  overflow: scroll;
-}
+<style scoped lang="less">
+@import '~@/styles/mixin.less';
 
-.site-aside-container {
-  flex: 1;
-}
+.app-container {
+  .self-fill(fixed);
 
-.wrapper {
-  position: relative;
-  flex: 1;
+  .aside {
+    width: 250px;
+    height: 100%;
+  }
 }
 </style>
