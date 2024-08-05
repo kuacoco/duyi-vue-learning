@@ -19,7 +19,7 @@ export default {
           <SiteAside />
         </div>
       </template>
-      <div>主区域，宽度占满剩余空间，溢出隐藏</div>
+      <RouterView />
     </Layout>
   </div>
 </template>

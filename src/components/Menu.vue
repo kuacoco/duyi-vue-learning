@@ -8,59 +8,49 @@ export default {
     return {
       items: [
         {
-          link: '/',
+          name: 'home',
           title: '首页',
           icon: 'home'
         },
         {
-          link: '/blog',
+          name: 'blog',
           title: '文章',
           icon: 'blog',
           startWith: true // 只要当前路径以link开头，当前菜单就是选中的
         },
         {
-          link: '/about',
+          name: 'about',
           title: '关于我',
           icon: 'about'
         },
         {
-          link: '/project',
+          name: 'project',
           title: '项目&效果',
           icon: 'code'
         },
         {
-          link: '/message',
+          name: 'message',
           title: '留言板',
           icon: 'chat'
         }
       ]
     }
   },
-  methods: {
-    isSelected: function (item) {
-      const link = item.link.toLowerCase()
-      const curPathname = location.pathname.toLowerCase()
-      if (item.startWith) {
-        return curPathname.startsWith(link)
-      } else {
-        return curPathname === link
-      }
-    }
-  }
+  methods: {}
 }
 </script>
 
 <template>
   <nav class="menu-container">
-    <a
+    <RouterLink
       v-for="item in items"
-      :key="item.link"
-      :href="item.link"
-      :class="{ selected: isSelected(item) }"
+      :key="item.name"
+      :to="{ name: item.name }"
+      activeClass="selected"
     >
       <Icon :type="item.icon" />
       <span>{{ item.title }}</span>
-    </a>
+    </RouterLink>
   </nav>
 </template>
 
