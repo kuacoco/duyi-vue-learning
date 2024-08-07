@@ -23,8 +23,10 @@ export default function (options) {
   const icon = getComponentRootDom(Icon, { type: 'info' })
   div.innerHTML = `<div class="${showMessage.icon}">${icon.outerHTML}</div><div>${content}</div>`
   div.className = `${showMessage.message} ${showMessage['message-' + type]}`
-  if (getComputedStyle(container).position === 'static') {
-    container.style.position = 'relative'
+  if (options.container) {
+    if (getComputedStyle(container).position === 'static') {
+      container.style.position = 'relative'
+    }
   }
   container.appendChild(div)
   container.clientHeight

@@ -5,6 +5,14 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    proxy: {
+      '/MallMini': {
+        target: 'https://s3.yingjiang.co',
+        secure: false
+      }
+    }
+  },
   css: {
     preprocessorOptions: {
       less: {
@@ -12,9 +20,7 @@ export default defineConfig({
       }
     }
   },
-  plugins: [
-    vue()
-  ],
+  plugins: [vue()],
   resolve: {
     alias: [
       {
