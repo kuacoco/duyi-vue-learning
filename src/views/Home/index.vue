@@ -1,30 +1,146 @@
 <template>
   <div class="home-container" ref="home">
-    <h1>首页</h1>
-    <button @click="click">点我</button>
+    <ul class="carousel-container" :style="{ marginTop }">
+      <li v-for="banner in banners" :key="banner.id">
+        <CarouselItem />
+      </li>
+    </ul>
+    <div v-show="index > 0" class="icon icon-up" @click="switchTo(index - 1)">
+      <Icon type="arrowUp" />
+    </div>
+    <div v-show="index < banners.length - 1" class="icon icon-down" @click="switchTo(index + 1)">
+      <Icon type="arrowDown" />
+    </div>
+    <ul class="indicator">
+      <li v-for="(banner, i) in banners" :key="banner.id" :class="{ active: i === index }"></li>
+    </ul>
   </div>
 </template>
 
 <script>
+import CarouselItem from '@/views/Home/CarouselItem.vue'
+import Icon from '@/components/Icon.vue'
+import { getBanner } from '@/api/banner.js'
+
 export default {
+  components: { CarouselItem, Icon },
+  data() {
+    return {
+      banners: [],
+      index: 0,
+      containerHeight: 0
+    }
+  },
+  created() {
+    getBanner().then((res) => {
+      this.banners = res
+    })
+  },
+  mounted() {
+    this.containerHeight = this.$refs.home.clientHeight
+  },
   methods: {
-    click: function () {
-      this.$showMessage({
-        content: '发表成功啦！！',
-        type: 'success',
-        duration: 2000,
-        container: this.$refs.home,
-        callback: () => console.log('完成')
-      })
+    switchTo: function (index) {
+      this.index = index
+    }
+  },
+  computed: {
+    marginTop: function () {
+      return -this.index * this.containerHeight + 'px'
     }
   }
 }
 </script>
 
 <style scoped lang="less">
+@import '~@/styles/var.less';
+@import '~@/styles/mixin.less';
+
 .home-container {
-  width: 60%;
-  height: 500px;
-  background: beige;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .carousel-container {
+    width: 100%;
+    height: 100%;
+
+    li {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .icon {
+    .self-center();
+    transform: translateX(-50%);
+    color: @gray;
+    font-size: 30px;
+    cursor: pointer;
+    @gap: 25px;
+    @dis: 5px;
+    @keyframes arrowUp {
+      0% {
+        transform: translateY(-@dis);
+      }
+      50% {
+        transform: translateY(@dis);
+      }
+      100% {
+        transform: translateY(-@dis);
+      }
+    }
+    @keyframes arrowDown {
+      0% {
+        transform: translateY(@dis);
+      }
+      50% {
+        transform: translateY(-@dis);
+      }
+      100% {
+        transform: translateY(@dis);
+      }
+    }
+
+    &-up {
+      top: @gap;
+      animation: arrowUp 2s infinite;
+    }
+
+    &-down {
+      top: auto;
+      bottom: @gap;
+      animation: arrowDown 2s infinite;
+    }
+  }
+
+  .indicator {
+    .self-center();
+    right: 20px;
+    left: auto;
+    transform: translateY(-50%);
+
+    li {
+      width: 7px;
+      height: 7px;
+      background: @words;
+      border: 1px solid #fff;
+      border-radius: 50%;
+      margin-top: 10px;
+      cursor: pointer;
+      box-sizing: border-box;
+
+      &.active {
+        background: #fff;
+      }
+    }
+  }
 }
 </style>
