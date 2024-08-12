@@ -1,6 +1,6 @@
 <template>
   <div class="home-container" ref="home">
-    <ul class="carousel-container" :style="{ marginTop }">
+    <ul class="carousel-container" :style="{ marginTop }" @transitionend="switching = false">
       <li v-for="banner in banners" :key="banner.id">
         <CarouselItem />
       </li>
@@ -12,7 +12,12 @@
       <Icon type="arrowDown" />
     </div>
     <ul class="indicator">
-      <li v-for="(banner, i) in banners" :key="banner.id" :class="{ active: i === index }"></li>
+      <li
+        v-for="(banner, i) in banners"
+        :key="banner.id"
+        :class="{ active: i === index }"
+        @click="switchTo(i)"
+      ></li>
     </ul>
   </div>
 </template>
@@ -28,7 +33,8 @@ export default {
     return {
       banners: [],
       index: 0,
-      containerHeight: 0
+      containerHeight: 0,
+      switching: false
     }
   },
   created() {
@@ -37,9 +43,30 @@ export default {
     })
   },
   mounted() {
-    this.containerHeight = this.$refs.home.clientHeight
+    this.resize()
+    window.addEventListener('resize', this.resize)
+    window.addEventListener('wheel', this.wheel)
+  },
+  unmounted() {
+    window.removeEventListener('resize', this.resize)
+    window.removeEventListener('wheel', this.wheel)
   },
   methods: {
+    wheel: function (e) {
+      if (this.switching) {
+        return
+      }
+      if (e.deltaY > 5 && this.index < this.banners.length - 1) {
+        this.switching = true
+        this.switchTo(this.index + 1)
+      } else if (e.deltaY < -5 && this.index > 0) {
+        this.switching = true
+        this.switchTo(this.index - 1)
+      }
+    },
+    resize: function () {
+      this.containerHeight = this.$refs.home.clientHeight
+    },
     switchTo: function (index) {
       this.index = index
     }
@@ -71,6 +98,7 @@ export default {
   .carousel-container {
     width: 100%;
     height: 100%;
+    transition: 0.3s;
 
     li {
       width: 100%;
