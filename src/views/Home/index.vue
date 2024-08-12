@@ -1,6 +1,11 @@
 <template>
   <div class="home-container" ref="home">
-    <ul class="carousel-container" :style="{ marginTop }" @transitionend="switching = false">
+    <ul
+      class="carousel-container"
+      :style="{ marginTop }"
+      @wheel="handleWheel"
+      @transitionend="switching = false"
+    >
       <li v-for="banner in banners" :key="banner.id">
         <CarouselItem />
       </li>
@@ -43,16 +48,14 @@ export default {
     })
   },
   mounted() {
-    this.resize()
-    window.addEventListener('resize', this.resize)
-    window.addEventListener('wheel', this.wheel)
+    this.handleResize()
+    window.addEventListener('resize', this.handleResize)
   },
   unmounted() {
-    window.removeEventListener('resize', this.resize)
-    window.removeEventListener('wheel', this.wheel)
+    window.removeEventListener('resize', this.handleResize)
   },
   methods: {
-    wheel: function (e) {
+    handleWheel: function (e) {
       if (this.switching) {
         return
       }
@@ -64,7 +67,7 @@ export default {
         this.switchTo(this.index - 1)
       }
     },
-    resize: function () {
+    handleResize: function () {
       this.containerHeight = this.$refs.home.clientHeight
     },
     switchTo: function (index) {
