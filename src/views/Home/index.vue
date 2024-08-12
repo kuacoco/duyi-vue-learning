@@ -7,7 +7,7 @@
       @transitionend="switching = false"
     >
       <li v-for="banner in banners" :key="banner.id">
-        <CarouselItem />
+        <CarouselItem :item="banner" />
       </li>
     </ul>
     <div v-show="index > 0" class="icon icon-up" @click="switchTo(index - 1)">
