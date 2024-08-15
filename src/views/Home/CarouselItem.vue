@@ -1,17 +1,30 @@
 <script setup>
 import ImageLoader from '@/components/ImageLoader.vue'
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 
 const props = defineProps(['item'])
 
+const innerSize = ref({ width: 0, height: 0 })
+const outerSize = ref({ width: 0, height: 0 })
 const title = ref()
 const desc = ref()
+const container = ref()
+const image = ref()
+const left = ref(0)
+const top = ref(0)
+const position = computed(() => {
+  return { transform: `translate(${left.value}px, ${top.value}px)` }
+})
+const center = computed(() => {
+  return {
+    left: (innerSize.value.width - outerSize.value.width) / 2,
+    top: (innerSize.value.height - outerSize.value.height) / 2
+  }
+})
 
-function handleLoad() {
+function loadHandler() {
   const titleWidth = title.value.clientWidth
   const descWidth = desc.value.clientWidth
-
-  console.log(titleWidth, descWidth)
 
   title.value.style.width = 0
   title.value.style.opacity = 1
@@ -22,11 +35,49 @@ function handleLoad() {
   title.value.style.width = titleWidth + 'px'
   desc.value.style.width = descWidth + 'px'
 }
+
+function mouseMoveHandler(e) {
+  left.value = ((innerSize.value.width - outerSize.value.width) / outerSize.value.width) * e.offsetX
+  top.value =
+    ((innerSize.value.height - outerSize.value.height) / outerSize.value.height) * e.offsetY
+}
+
+function mouseLeaveHandler() {
+  left.value = center.value.left
+  top.value = center.value.top
+}
+
+function resizeHandler() {
+  innerSize.value = {
+    width: container.value.clientWidth,
+    height: container.value.clientHeight
+  }
+  outerSize.value = {
+    width: image.value.clientWidth,
+    height: image.value.clientHeight
+  }
+}
+
+onMounted(() => {
+  resizeHandler()
+  window.addEventListener('resize', resizeHandler)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', resizeHandler)
+})
 </script>
 
 <template>
-  <div class="carousel-item-container">
-    <ImageLoader :placeholder="item.midImg" :src="item.bigImg" @load="handleLoad" />
+  <div
+    class="carousel-item-container"
+    ref="container"
+    @mousemove="mouseMoveHandler"
+    @mouseleave="mouseLeaveHandler"
+  >
+    <div class="image" :style="position" ref="image">
+      <ImageLoader :placeholder="item.midImg" :src="item.bigImg" @load="loadHandler" />
+    </div>
     <div class="title" ref="title">{{ item.title }}</div>
     <div class="desc" ref="desc">{{ item.description }}</div>
   </div>
@@ -39,6 +90,14 @@ function handleLoad() {
   height: 100%;
   color: #fff;
   position: relative;
+  overflow: hidden;
+
+  .image {
+    width: 110%;
+    height: 110%;
+    position: absolute;
+    transition: 0.5s;
+  }
 
   .title {
     position: absolute;
