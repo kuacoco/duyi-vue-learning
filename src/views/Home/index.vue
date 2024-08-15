@@ -1,5 +1,5 @@
 <template>
-  <div class="home-container" ref="home">
+  <div v-loading="banners.length === 0" class="home-container" ref="home">
     <ul
       class="carousel-container"
       :style="{ marginTop }"
