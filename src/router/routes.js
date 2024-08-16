@@ -8,6 +8,7 @@ const routes = [
   { name: 'home', path: '/', component: Home },
   { name: 'about', path: '/about', component: About },
   { name: 'blog', path: '/blog', component: Blog },
+  { name: 'blogCategory', path: '/blog/cate/:categoryId', component: Blog },
   { name: 'message', path: '/message', component: Message },
   { name: 'project', path: '/project', component: Project }
 ]
