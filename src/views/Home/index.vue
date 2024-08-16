@@ -1,24 +1,24 @@
 <template>
-  <div v-loading="banners.length === 0" class="home-container" ref="home">
+  <div v-loading="isLoading" class="home-container" ref="home">
     <ul
       class="carousel-container"
       :style="{ marginTop }"
       @wheel="handleWheel"
       @transitionend="switching = false"
     >
-      <li v-for="banner in banners" :key="banner.id">
+      <li v-for="banner in data" :key="banner.id">
         <CarouselItem :item="banner" />
       </li>
     </ul>
     <div v-show="index > 0" class="icon icon-up" @click="switchTo(index - 1)">
       <Icon type="arrowUp" />
     </div>
-    <div v-show="index < banners.length - 1" class="icon icon-down" @click="switchTo(index + 1)">
+    <div v-show="index < data.length - 1" class="icon icon-down" @click="switchTo(index + 1)">
       <Icon type="arrowDown" />
     </div>
     <ul class="indicator">
       <li
-        v-for="(banner, i) in banners"
+        v-for="(banner, i) in data"
         :key="banner.id"
         :class="{ active: i === index }"
         @click="switchTo(i)"
@@ -31,21 +31,20 @@
 import CarouselItem from '@/views/Home/CarouselItem.vue'
 import Icon from '@/components/Icon.vue'
 import { getBanner } from '@/api/banner.js'
+import { useFetch } from '@/composables/fetch.js'
 
 export default {
   components: { CarouselItem, Icon },
   data() {
     return {
-      banners: [],
       index: 0,
       containerHeight: 0,
       switching: false
     }
   },
-  created() {
-    getBanner().then((res) => {
-      this.banners = res
-    })
+  setup() {
+    const { isLoading, data } = useFetch(getBanner, [])
+    return { isLoading, data }
   },
   mounted() {
     this.handleResize()
@@ -59,7 +58,7 @@ export default {
       if (this.switching) {
         return
       }
-      if (e.deltaY > 5 && this.index < this.banners.length - 1) {
+      if (e.deltaY > 5 && this.index < this.data.length - 1) {
         this.switching = true
         this.switchTo(this.index + 1)
       } else if (e.deltaY < -5 && this.index > 0) {

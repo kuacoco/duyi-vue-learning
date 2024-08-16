@@ -15,6 +15,12 @@ const top = ref(0)
 const position = computed(() => {
   return { transform: `translate(${left.value}px, ${top.value}px)` }
 })
+const ratio = computed(() => {
+  return {
+    width: (innerSize.value.width - outerSize.value.width) / outerSize.value.width,
+    height: (innerSize.value.height - outerSize.value.height) / outerSize.value.height
+  }
+})
 const center = computed(() => {
   return {
     left: (innerSize.value.width - outerSize.value.width) / 2,
@@ -37,9 +43,8 @@ function loadHandler() {
 }
 
 function mouseMoveHandler(e) {
-  left.value = ((innerSize.value.width - outerSize.value.width) / outerSize.value.width) * e.offsetX
-  top.value =
-    ((innerSize.value.height - outerSize.value.height) / outerSize.value.height) * e.offsetY
+  left.value = ratio.value.width * e.offsetX
+  top.value = ratio.value.height * e.offsetY
 }
 
 function mouseLeaveHandler() {
@@ -85,6 +90,7 @@ onUnmounted(() => {
 
 <style scoped lang="less">
 @import '@/styles/var.less';
+
 .carousel-item-container {
   width: 100%;
   height: 100%;
