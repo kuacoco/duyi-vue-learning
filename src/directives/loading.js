@@ -1,8 +1,8 @@
 import loading from './loading.module.less'
 import imageSrc from '@/assets/loading.svg'
 
-function getImgDom() {
-  return document.querySelector('img[data-role=loading]')
+function getImgDom(el) {
+  return el.querySelector('img[data-role=loading]')
 }
 
 function createImgDom() {
@@ -14,7 +14,7 @@ function createImgDom() {
 }
 
 export default (el, binding) => {
-  const imgDom = getImgDom()
+  const imgDom = getImgDom(el)
   if (binding.value) {
     !imgDom && el.appendChild(createImgDom())
   } else {

@@ -1,33 +1,89 @@
+<script setup>
+import { useFetch } from '@/composables/fetch.js'
+import { getBlogList } from '@/api/blog.js'
+import { useRoute, useRouter } from 'vue-router'
+import { ref, computed, watch } from 'vue'
+import Pager from '@/components/Pager.vue'
+
+const route = useRoute()
+const router = useRouter()
+const routeInfo = computed(() => {
+  return {
+    page: +route.query.page || 1,
+    limit: +route.query.limit || 10,
+    categoryId: +route.params.categoryId || -1
+  }
+})
+const fetchData = () => {
+  return getBlogList(routeInfo.value.page, routeInfo.value.limit, routeInfo.value.categoryId)
+}
+const { isLoading, data } = useFetch(fetchData, [])
+
+function pageChangeHandler(e) {
+  const query = {
+    page: e,
+    limit: routeInfo.value.limit
+  }
+  if (routeInfo.value.categoryId !== -1) {
+    router.push({
+      name: 'blogCategory',
+      params: {
+        categoryId: routeInfo.value.categoryId
+      },
+      query
+    })
+  } else {
+    router.push({
+      name: 'blog',
+      query
+    })
+  }
+}
+
+const container = ref()
+watch(
+  () => routeInfo.value.page,
+  async (newValue) => {
+    isLoading.value = true
+    container.value.scrollTop = 0
+    data.value = await fetchData()
+    isLoading.value = false
+  }
+)
+</script>
+
 <template>
-  <div class="blog-list-container">
+  <div v-loading="isLoading" class="blog-list-container" ref="container">
     <ul>
-      <li>
+      <li v-for="item in data.rows" :key="item.id">
         <div class="thumb">
           <a href="">
-            <img
-              src="http://dummyimage.com/300x250/000/fff&amp;text=Random Image"
-              alt="回书义常且音"
-              title="回书义常且音"
-            />
+            <img v-if="item.thumb" :src="item.thumb" :alt="item.title" :title="item.title" />
           </a>
         </div>
         <div class="main">
           <a href="">
-            <h2>回书义常且音</h2>
+            <h2>{{ item.title }}</h2>
           </a>
           <div class="aside">
-            <span>日期：2009-8-29</span>
-            <span>浏览：2278</span>
-            <span>评论78</span>
-            <a href="/article/cate/8" class="">分类8</a>
+            <span>日期：{{ item.createDate }}</span>
+            <span>浏览：{{ item.scanNumber }}</span>
+            <span>评论{{ item.commentNumber }}</span>
+            <a :href="`/article/cate/${item.category.id}`" class="">{{ item.category.name }}</a>
           </div>
           <div class="desc">
-            同空能京南进安西完再支风飞严领光。得生这局月确位军们离存电。热建子光验复更度合确验前切声。
+            {{ item.description }}
           </div>
         </div>
       </li>
     </ul>
     <!-- 分页放到这里 -->
+    <Pager
+      :current="routeInfo.page"
+      :limit="routeInfo.limit"
+      :total="data.total"
+      @page-change="pageChangeHandler"
+    />
   </div>
 </template>
 

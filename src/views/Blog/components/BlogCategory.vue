@@ -30,13 +30,24 @@ const list = computed(() => {
 })
 
 function selectHandler(e) {
-  router.push({
-    name: 'blogCategory',
-    params: {
-      categoryId: e.id
-    },
-    query: route.query
-  })
+  const query = {
+    page: 1,
+    limit: route.query.limit
+  }
+  if (e.id !== -1) {
+    router.push({
+      name: 'blogCategory',
+      params: {
+        categoryId: e.id
+      },
+      query
+    })
+  } else {
+    router.push({
+      name: 'blog',
+      query
+    })
+  }
 }
 </script>
 
