@@ -4,6 +4,7 @@ import { getBlogList } from '@/api/blog.js'
 import { useRoute, useRouter } from 'vue-router'
 import { ref, computed, watch } from 'vue'
 import Pager from '@/components/Pager.vue'
+import { formatDateTime } from '@/utils/index.js'
 
 const route = useRoute()
 const router = useRouter()
@@ -41,15 +42,12 @@ function pageChangeHandler(e) {
 }
 
 const container = ref()
-watch(
-  () => routeInfo.value.page,
-  async (newValue) => {
-    isLoading.value = true
-    container.value.scrollTop = 0
-    data.value = await fetchData()
-    isLoading.value = false
-  }
-)
+watch(routeInfo, async (newValue) => {
+  isLoading.value = true
+  container.value.scrollTop = 0
+  data.value = await fetchData()
+  isLoading.value = false
+})
 </script>
 
 <template>
@@ -62,14 +60,16 @@ watch(
           </a>
         </div>
         <div class="main">
-          <a href="">
+          <RouterLink :to="{ name: 'blogDetail', params: { id: item.id } }">
             <h2>{{ item.title }}</h2>
-          </a>
+          </RouterLink>
           <div class="aside">
-            <span>日期：{{ item.createDate }}</span>
+            <span>日期：{{ formatDateTime(item.createDate) }}</span>
             <span>浏览：{{ item.scanNumber }}</span>
             <span>评论{{ item.commentNumber }}</span>
-            <a :href="`/article/cate/${item.category.id}`" class="">{{ item.category.name }}</a>
+            <RouterLink :to="{ name: 'blogCategory', params: { categoryId: item.category.id } }">
+              {{ item.category.name }}
+            </RouterLink>
           </div>
           <div class="desc">
             {{ item.description }}
