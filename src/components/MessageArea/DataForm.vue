@@ -14,7 +14,10 @@ const formData = ref({
 const emit = defineEmits(['submit'])
 
 function submitHandler(e) {
-  emit('submit', formData.value)
+  isSubmitting.value = true
+  emit('submit', formData.value, () => {
+    isSubmitting.value = false
+  })
 }
 </script>
 

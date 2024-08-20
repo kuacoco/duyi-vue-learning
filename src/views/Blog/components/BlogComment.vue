@@ -11,14 +11,15 @@ function fetchData() {
   return getCommentList(route.params.id)
 }
 
-async function submitHandler(formData) {
+async function submitHandler(formData, callback) {
   const res = await postComment({
     nickname: formData.nickname,
     content: formData.content,
     blogId: route.params.id
   })
 
-  console.log(res)
+  data.value.rows.splice(0, 0, res)
+  callback()
 }
 </script>
 
