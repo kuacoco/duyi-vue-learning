@@ -2,6 +2,10 @@
 import DataForm from './DataForm.vue'
 import DataList from './DataList.vue'
 
+defineOptions({
+  name: 'MessageArea'
+})
+
 const props = defineProps({
   title: String,
   subTitle: String,

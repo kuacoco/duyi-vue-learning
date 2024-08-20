@@ -2,7 +2,7 @@ import loading from './loading.module.less'
 import imageSrc from '@/assets/loading.svg'
 
 function getImgDom(el) {
-  return el.querySelector('img[data-role=loading]')
+  return el.querySelector('img[data-role=loading]:not(:scope div img)')
 }
 
 function createImgDom() {

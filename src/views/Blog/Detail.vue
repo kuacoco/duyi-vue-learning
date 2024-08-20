@@ -19,7 +19,7 @@ function fetchData() {
   <Layout>
     <div class="main-container" v-loading="isLoading">
       <BlogDetail :data v-if="data" />
-      <BlogComment />
+      <BlogComment v-if="!isLoading" />
     </div>
     <template #right>
       <div class="right-container" v-loading="isLoading">

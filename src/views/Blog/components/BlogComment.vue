@@ -1,10 +1,25 @@
 <script setup>
 import MessageArea from '@/components/MessageArea/index.vue'
+import { useFetch } from '@/composables/fetch.js'
+import { getCommentList } from '@/api/blog.js'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+const { isLoading, data } = useFetch(fetchData, { total: 0, rows: [] })
+
+function fetchData() {
+  return getCommentList(route.params.id)
+}
 </script>
 
 <template>
   <div class="blog-comment-container">
-    <MessageArea />
+    <MessageArea
+      title="评论列表"
+      :sub-title="`(${data.total})`"
+      :list="data.rows"
+      :isListLoading="isLoading"
+    />
   </div>
 </template>
 

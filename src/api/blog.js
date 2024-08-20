@@ -22,7 +22,7 @@ export async function postComment(commentInfo) {
   return await request.post('/api/comment', commentInfo)
 }
 
-export async function getCommentList(page = 1, limit = 10, blogId = -1) {
+export async function getCommentList(blogId = -1, page = 1, limit = 10) {
   return await request.get('/api/comment', {
     params: {
       page,
