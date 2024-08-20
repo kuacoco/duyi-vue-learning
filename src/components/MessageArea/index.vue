@@ -3,7 +3,8 @@ import DataForm from './DataForm.vue'
 import DataList from './DataList.vue'
 
 defineOptions({
-  name: 'MessageArea'
+  name: 'MessageArea',
+  inheritAttrs: false
 })
 
 const props = defineProps({
@@ -16,7 +17,7 @@ const props = defineProps({
 
 <template>
   <div class="message-area-container">
-    <DataForm />
+    <DataForm v-bind="$attrs" />
     <h3>
       {{ title }}
       <span>{{ subTitle }}</span>

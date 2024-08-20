@@ -11,9 +11,10 @@ const formData = ref({
   nickname: '',
   content: ''
 })
+const emit = defineEmits(['submit'])
 
 function submitHandler(e) {
-  console.log(e)
+  emit('submit', formData.value)
 }
 </script>
 
