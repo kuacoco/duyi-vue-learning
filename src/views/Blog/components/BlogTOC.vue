@@ -30,7 +30,19 @@ function selectHandler(e) {
 </script>
 
 <template>
-  <RightList :list @select="selectHandler" />
+  <div class="blog-toc-container">
+    <h2>目录</h2>
+    <RightList :list @select="selectHandler" />
+  </div>
 </template>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.blog-toc-container {
+  h2 {
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 1em;
+    margin: 0;
+  }
+}
+</style>

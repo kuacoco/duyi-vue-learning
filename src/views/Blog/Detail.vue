@@ -5,6 +5,7 @@ import Layout from '@/components/Layout.vue'
 import { getBlog } from '@/api/blog.js'
 import { useFetch } from '@/composables/fetch.js'
 import { useRoute } from 'vue-router'
+import BlogComment from '@/views/Blog/components/BlogComment.vue'
 
 const route = useRoute()
 const { isLoading, data } = useFetch(fetchData)
@@ -18,6 +19,7 @@ function fetchData() {
   <Layout>
     <div class="main-container" v-loading="isLoading">
       <BlogDetail :data v-if="data" />
+      <BlogComment />
     </div>
     <template #right>
       <div class="right-container" v-loading="isLoading">
