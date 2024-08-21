@@ -17,9 +17,9 @@ async function submitHandler(formData, callback) {
     content: formData.content,
     blogId: route.params.id
   })
-
-  data.value.rows.splice(0, 0, res)
-  callback()
+  data.value.total++
+  data.value.rows.unshift(res)
+  callback('评论成功')
 }
 </script>
 

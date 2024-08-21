@@ -14,8 +14,14 @@ const props = defineProps({
     <div class="aside">
       <span>日期: {{ formatDateTime(data.createDate) }}</span>
       <span>浏览: {{ data.scanNumber }}</span>
-      <a href="">评论: {{ data.commentNumber }}</a>
-      <a href="">{{ data.category.name }}</a>
+      <a href="#data-form-container">评论: {{ data.commentNumber }}</a>
+      <RouterLink
+        :to="{
+          name: 'blogCategory',
+          params: { categoryId: data.category.id }
+        }"
+        >{{ data.category.name }}
+      </RouterLink>
     </div>
     <div v-html="data.htmlContent" class="markdown-body"></div>
   </div>

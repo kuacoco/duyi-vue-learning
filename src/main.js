@@ -9,6 +9,6 @@ import '@/mock'
 import loading from '@/directives/loading.js'
 
 const app = createApp(App)
-app.config.globalProperties.$showMessage = showMessage
+app.provide('showMessage', showMessage)
 app.use(router).mount('#app')
 app.directive('loading', loading)

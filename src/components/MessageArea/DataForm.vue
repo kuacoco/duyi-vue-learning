@@ -1,6 +1,7 @@
 <script setup>
-import { ref } from 'vue'
+import { inject, ref } from 'vue'
 
+const showMessage = inject('showMessage')
 const form = ref()
 const isSubmitting = ref(false)
 const error = ref({
@@ -14,9 +15,28 @@ const formData = ref({
 const emit = defineEmits(['submit'])
 
 function submitHandler(e) {
+  formData.value.nickname === ''
+    ? (error.value.nickname = '昵称不能为空')
+    : (error.value.nickname = '')
+  formData.value.content === ''
+    ? (error.value.content = '内容不能为空')
+    : (error.value.content = '')
+
+  if (error.value.nickname !== '' || error.value.content !== '') {
+    return
+  }
+
   isSubmitting.value = true
-  emit('submit', formData.value, () => {
-    isSubmitting.value = false
+  emit('submit', formData.value, (successMsg) => {
+    showMessage({
+      content: successMsg,
+      type: 'success',
+      duration: 2000,
+      container: form.value,
+      callback: () => {
+        isSubmitting.value = false
+      }
+    })
   })
 }
 </script>
