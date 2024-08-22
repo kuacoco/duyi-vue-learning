@@ -1,12 +1,14 @@
 <script>
 import Layout from '@/components/Layout.vue'
 import SiteAside from '@/components/SiteAside.vue'
+import ToTop from '@/components/ToTop.vue'
 
 export default {
   name: 'App',
   components: {
     SiteAside,
-    Layout
+    Layout,
+    ToTop
   }
 }
 </script>
@@ -21,6 +23,7 @@ export default {
       </template>
       <RouterView />
     </Layout>
+    <ToTop />
   </div>
 </template>
 

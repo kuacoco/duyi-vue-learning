@@ -5,6 +5,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { ref, computed, watch } from 'vue'
 import Pager from '@/components/Pager.vue'
 import { formatDateTime } from '@/utils/index.js'
+import { useMainScroll } from '@/composables/mainScroll.js'
 
 const route = useRoute()
 const router = useRouter()
@@ -19,6 +20,7 @@ const fetchData = () => {
   return getBlogList(routeInfo.value.page, routeInfo.value.limit, routeInfo.value.categoryId)
 }
 const { isLoading, data } = useFetch(fetchData, [])
+useMainScroll('mainContainer')
 
 function pageChangeHandler(e) {
   const query = {
@@ -41,17 +43,17 @@ function pageChangeHandler(e) {
   }
 }
 
-const container = ref()
+const mainContainer = ref()
 watch(routeInfo, async (newValue) => {
   isLoading.value = true
-  container.value.scrollTop = 0
+  mainContainer.value.scrollTop = 0
   data.value = await fetchData()
   isLoading.value = false
 })
 </script>
 
 <template>
-  <div v-loading="isLoading" class="blog-list-container" ref="container">
+  <div v-loading="isLoading" class="blog-list-container" ref="mainContainer">
     <ul>
       <li v-for="item in data.rows" :key="item.id">
         <div class="thumb">

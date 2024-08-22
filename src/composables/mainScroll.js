@@ -19,6 +19,7 @@ export function useMainScroll(refName) {
   })
 
   onUnmounted(() => {
+    eventBus.emit('mainScroll')
     el.removeEventListener('scroll', scrollHandler)
     eventBus.off('scrollToTop', scrollToTopHandler)
   })
