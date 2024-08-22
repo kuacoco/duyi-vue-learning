@@ -46,9 +46,9 @@ function pageChangeHandler(e) {
 const mainContainer = ref()
 watch(routeInfo, async (newValue) => {
   isLoading.value = true
-  mainContainer.value.scrollTop = 0
   data.value = await fetchData()
   isLoading.value = false
+  mainContainer.value.scrollTop = 0
 })
 </script>
 
@@ -58,7 +58,7 @@ watch(routeInfo, async (newValue) => {
       <li v-for="item in data.rows" :key="item.id">
         <div class="thumb">
           <a href="">
-            <img v-if="item.thumb" :src="item.thumb" :alt="item.title" :title="item.title" />
+            <img v-if="item.thumb" v-lazy="item.thumb" :alt="item.title" :title="item.title" />
           </a>
         </div>
         <div class="main">
