@@ -1,33 +1,20 @@
 <script setup>
 import BlogDetail from '@/views/Blog/components/BlogDetail.vue'
+import BlogComment from '@/views/Blog/components/BlogComment.vue'
 import BlogTOC from '@/views/Blog/components/BlogTOC.vue'
 import Layout from '@/components/Layout.vue'
 import { getBlog } from '@/api/blog.js'
 import { useFetch } from '@/composables/fetch.js'
+import { useMainScroll } from '@/composables/mainScroll.js'
 import { useRoute } from 'vue-router'
-import BlogComment from '@/views/Blog/components/BlogComment.vue'
-import { inject, onMounted, onUnmounted, ref } from 'vue'
 
-const eventBus = inject('eventBus')
 const route = useRoute()
 const { isLoading, data } = useFetch(fetchData)
-const mainContainer = ref(null)
+useMainScroll('mainContainer')
 
 function fetchData() {
   return getBlog(route.params.id)
 }
-
-function scrollHandler() {
-  eventBus.emit('mainscroll')
-}
-
-onMounted(() => {
-  mainContainer.value.addEventListener('scroll', scrollHandler)
-})
-
-onUnmounted(() => {
-  mainContainer.value.removeEventListener('scroll', scrollHandler)
-})
 </script>
 
 <template>

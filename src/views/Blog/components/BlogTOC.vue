@@ -62,11 +62,11 @@ function setActiveAnchor() {
 const mainscrollHandler = debounce(setActiveAnchor, 50)
 
 onMounted(() => {
-  eventBus.on('mainscroll', mainscrollHandler)
+  eventBus.on('mainScroll', mainscrollHandler)
 })
 
 onUnmounted(() => {
-  eventBus.off('mainscroll', mainscrollHandler)
+  eventBus.off('mainScroll', mainscrollHandler)
 })
 </script>
 
