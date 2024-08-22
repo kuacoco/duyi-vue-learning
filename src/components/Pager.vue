@@ -25,16 +25,22 @@ export default {
       return Math.ceil(this.total / this.limit)
     },
     pageNumbers: function () {
-      let min = this.current - Math.floor(this.visibleNumber / 2)
-      if (min <= 0) {
-        min = 1
+      if (this.maxPageNumber > this.visibleNumber) {
+        let min = this.current - Math.floor(this.visibleNumber / 2)
+        if (min <= 0) {
+          min = 1
+        }
+        if (min + this.visibleNumber - 1 > this.maxPageNumber) {
+          min = this.maxPageNumber - this.visibleNumber + 1
+        }
+        return Array(this.visibleNumber)
+          .fill(0)
+          .map((item, i) => min + i)
+      } else {
+        return Array(this.maxPageNumber)
+          .fill(0)
+          .map((item, i) => 1 + i)
       }
-      if (min + this.visibleNumber - 1 > this.maxPageNumber) {
-        min = this.maxPageNumber - this.visibleNumber + 1
-      }
-      return Array(this.visibleNumber)
-        .fill(0)
-        .map((item, i) => min + i)
     }
   }
 }
@@ -42,8 +48,20 @@ export default {
 
 <template>
   <div class="pager-container">
-    <a :class="{ disabled: current === 1 }" @click="$emit('pageChange', 1)">|<<</a>
-    <a :class="{ disabled: current === 1 }" @click="$emit('pageChange', current - 1)"><<</a>
+    <a
+      v-show="pageNumbers.length > 1"
+      :class="{ disabled: current === 1 }"
+      @click="$emit('pageChange', 1)"
+    >
+      |<<
+    </a>
+    <a
+      v-show="pageNumbers.length > 1"
+      :class="{ disabled: current === 1 }"
+      @click="$emit('pageChange', current - 1)"
+    >
+      <<
+    </a>
     <a
       v-for="(page, i) in pageNumbers"
       :key="i"
@@ -52,12 +70,20 @@ export default {
     >
       {{ page }}
     </a>
-    <a :class="{ disabled: current === maxPageNumber }" @click="$emit('pageChange', current + 1)"
-      >>></a
+    <a
+      v-show="pageNumbers.length > 1"
+      :class="{ disabled: current === maxPageNumber }"
+      @click="$emit('pageChange', current + 1)"
     >
-    <a :class="{ disabled: current === maxPageNumber }" @click="$emit('pageChange', maxPageNumber)"
-      >>>|</a
+      >>
+    </a>
+    <a
+      v-show="pageNumbers.length > 1"
+      :class="{ disabled: current === maxPageNumber }"
+      @click="$emit('pageChange', maxPageNumber)"
     >
+      >>|
+    </a>
   </div>
 </template>
 
