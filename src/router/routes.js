@@ -1,5 +1,6 @@
 import 'nprogress/nprogress.css'
 import { start, done, configure } from 'nprogress'
+import NotFound from '@/views/NotFound.vue'
 
 configure({
   trickleSpeed: 20,
@@ -64,6 +65,11 @@ const routes = [
     path: '/project',
     meta: { title: '项目&详情' },
     component: getPageComponent(() => import('@/views/Project/index.vue'))
+  },
+  {
+    name: '404',
+    path: '/:pathMatch(.*)*',
+    component: NotFound
   }
 ]
 
