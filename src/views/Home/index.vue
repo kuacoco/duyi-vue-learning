@@ -1,5 +1,5 @@
 <template>
-  <div v-loading="isLoading" class="home-container" ref="home">
+  <div v-loading="loading" class="home-container" ref="home">
     <ul
       class="carousel-container"
       :style="{ marginTop }"
@@ -30,8 +30,7 @@
 <script>
 import CarouselItem from '@/views/Home/CarouselItem.vue'
 import Icon from '@/components/Icon.vue'
-import { getBanner } from '@/api/banner.js'
-import { useFetch } from '@/composables/fetch.js'
+import { mapState } from 'vuex'
 
 export default {
   components: { CarouselItem, Icon },
@@ -42,9 +41,8 @@ export default {
       switching: false
     }
   },
-  setup() {
-    const { isLoading, data } = useFetch(getBanner, [])
-    return { isLoading, data }
+  created() {
+    this.$store.dispatch('banner/fetchData')
   },
   mounted() {
     this.handleResize()
@@ -76,7 +74,8 @@ export default {
   computed: {
     marginTop: function () {
       return -this.index * this.containerHeight + 'px'
-    }
+    },
+    ...mapState('banner', ['loading', 'data'])
   }
 }
 </script>
