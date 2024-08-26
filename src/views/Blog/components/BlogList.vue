@@ -3,6 +3,7 @@ import { useFetch } from '@/composables/fetch.js'
 import { getBlogList } from '@/api/blog.js'
 import { useRoute, useRouter } from 'vue-router'
 import { ref, computed, watch } from 'vue'
+import Empty from '@/components/Empty.vue'
 import Pager from '@/components/Pager.vue'
 import { formatDateTime } from '@/utils/index.js'
 import { useMainScroll } from '@/composables/mainScroll.js'
@@ -19,7 +20,7 @@ const routeInfo = computed(() => {
 const fetchData = () => {
   return getBlogList(routeInfo.value.page, routeInfo.value.limit, routeInfo.value.categoryId)
 }
-const { isLoading, data } = useFetch(fetchData, [])
+const { isLoading, data } = useFetch(fetchData, { total: 0, rows: [] })
 useMainScroll('mainContainer')
 
 function pageChangeHandler(e) {
@@ -80,6 +81,7 @@ watch(routeInfo, async (newValue) => {
       </li>
     </ul>
     <!-- 分页放到这里 -->
+    <Empty v-if="data.rows.length === 0 && !isLoading" />
     <Pager
       :current="routeInfo.page"
       :limit="routeInfo.limit"
