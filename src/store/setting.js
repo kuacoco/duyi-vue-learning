@@ -1,4 +1,5 @@
 import { getSetting } from '@/api/setting.js'
+import { titleController } from '@/utils'
 
 export default {
   namespaced: true,
@@ -38,6 +39,10 @@ export default {
         link.href = res.favicon
 
         document.head.appendChild(link)
+      }
+
+      if (res.siteTitle) {
+        titleController.setSiteTitle(res.siteTitle)
       }
     }
   }

@@ -3,6 +3,7 @@ import BlogDetail from '@/views/Blog/components/BlogDetail.vue'
 import BlogComment from '@/views/Blog/components/BlogComment.vue'
 import BlogTOC from '@/views/Blog/components/BlogTOC.vue'
 import Layout from '@/components/Layout.vue'
+import { titleController } from '@/utils/index.js'
 import { getBlog } from '@/api/blog.js'
 import { useFetch } from '@/composables/fetch.js'
 import { useMainScroll } from '@/composables/mainScroll.js'
@@ -12,8 +13,10 @@ const route = useRoute()
 const { isLoading, data } = useFetch(fetchData)
 useMainScroll('mainContainer')
 
-function fetchData() {
-  return getBlog(route.params.id)
+async function fetchData() {
+  const res = await getBlog(route.params.id)
+  titleController.setRouteTitle(res.title)
+  return res
 }
 </script>
 
