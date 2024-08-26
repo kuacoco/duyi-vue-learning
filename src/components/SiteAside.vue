@@ -2,20 +2,22 @@
 import Avatar from '@/components/Avatar.vue'
 import Menu from '@/components/Menu.vue'
 import Contact from '@/components/Contact.vue'
+import { mapState } from 'vuex'
 
 export default {
   name: 'SiteAside',
-  components: { Contact, Menu, Avatar }
+  components: { Contact, Menu, Avatar },
+  computed: mapState('setting', ['data'])
 }
 </script>
 
 <template>
   <div class="site-aside-container">
-    <Avatar url="https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar8.jpg" :size="150" />
-    <h1 class="title">CC的小窝</h1>
+    <Avatar v-if="data" :url="data.avatar" :size="150" />
+    <h1 class="title" v-if="data">{{ data.siteTitle }}</h1>
     <Menu />
     <Contact />
-    <p class="footer">黑ICP备17001719</p>
+    <p v-if="data" class="footer">{{ data.icp }}</p>
   </div>
 </template>
 

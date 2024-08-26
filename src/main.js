@@ -11,6 +11,8 @@ import lazy from '@/directives/lazy.js'
 import mitt from 'mitt'
 import store from './store'
 
+store.dispatch('setting/fetchData')
+
 const app = createApp(App)
 app.provide('showMessage', showMessage)
 app.provide('eventBus', mitt())
