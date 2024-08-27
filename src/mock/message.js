@@ -10,10 +10,10 @@ Mock.mock('/api/message', 'post', {
     content: '@cparagraph(1, 10)',
     createDate: Date.now(),
     'avatar|1': [
-      'https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar6.jpg',
-      'https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar4.jpg',
-      'https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar8.jpg',
-      'https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar2.jpg'
+      'https://img2.woyaogexing.com/2024/05/26/1f1a4944d0f2f23e!400x400.png',
+      'https://img2.woyaogexing.com/2024/05/26/af8c794dbef3f054!400x400.png',
+      'https://img2.woyaogexing.com/2024/05/26/c2bfb02d0bcfff88!400x400.png',
+      'https://img2.woyaogexing.com/2024/05/26/26307cdd9d6492c5!400x400.png'
     ]
   }
 })
@@ -33,10 +33,10 @@ Mock.mock(/^\/api\/message\/?(\?.+)?$/, 'get', function (options) {
           content: '@cparagraph(1, 10)',
           createDate: Date.now(),
           'avatar|1': [
-            'https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar6.jpg',
-            'https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar4.jpg',
-            'https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar8.jpg',
-            'https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar2.jpg'
+            'https://img2.woyaogexing.com/2024/05/26/1f1a4944d0f2f23e!400x400.png',
+            'https://img2.woyaogexing.com/2024/05/26/af8c794dbef3f054!400x400.png',
+            'https://img2.woyaogexing.com/2024/05/26/c2bfb02d0bcfff88!400x400.png',
+            'https://img2.woyaogexing.com/2024/05/26/26307cdd9d6492c5!400x400.png'
           ]
         }
       ]
