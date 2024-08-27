@@ -4,18 +4,16 @@ Mock.mock('/api/setting', 'get', {
   code: 0,
   msg: '',
   data: {
-    avatar: 'https://qiheizhiya.oss-cn-shenzhen.aliyuncs.com/image/avatar8.jpg',
-    siteTitle: '我的个人空间',
-    github: 'https://github.com/DuYi-Edu',
-    qq: '3263023350',
-    qqQrCode:
-      'http://www.duyiedu.com/source/img/%E5%B0%8F%E6%B8%A1%E5%BE%AE%E4%BF%A1%E4%BA%8C%E7%BB%B4%E7%A0%81.png',
-    weixin: 'yh777bao',
-    weixinQrCode:
-      'http://www.duyiedu.com/source/img/%E5%85%AC%E4%BC%97%E5%8F%B7%E4%BA%8C%E7%BB%B4%E7%A0%81.png',
-    mail: 'duyi@gmail.com',
-    icp: '黑ICP备17001719号',
-    githubName: 'DuYi-Edu',
-    favicon: 'http://mdrs.yuanjin.tech/Fs4CDlC6mwe_WXLMIiXcmSJLHO4f'
+    avatar: 'https://avatars.githubusercontent.com/u/10595589?v=4',
+    siteTitle: 'CC的Vue实践',
+    github: 'https://github.com/kuacoco',
+    qq: '228847758',
+    qqQrCode: 'https://github.com/user-attachments/assets/326746bc-11db-4c01-b790-738978c82224',
+    weixin: 'kuacoco',
+    weixinQrCode: 'https://github.com/user-attachments/assets/d5bad01d-2da8-4ca9-96a2-0a45078a4e66',
+    mail: 'kuacoco@gmail.com',
+    icp: '苏ICP备19910004号',
+    githubName: 'kuacoco',
+    favicon: 'https://avatars.githubusercontent.com/u/10595589?s=80&v=4'
   }
 })

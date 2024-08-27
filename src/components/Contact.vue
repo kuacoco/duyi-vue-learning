@@ -25,6 +25,9 @@ export default {
     >
       <Icon type="qq" />
       {{ data.qq }}
+      <div class="qrcode-container">
+        <img :src="data.qqQrCode" alt="" />
+      </div>
     </a>
     <a class="qrcode-hover">
       <Icon type="weixin" class="wx-icon" />

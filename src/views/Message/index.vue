@@ -42,6 +42,9 @@ async function fetchMore() {
 }
 
 function scrollHandler(el) {
+  if (!el) {
+    return
+  }
   const range = 200
   const dis = Math.abs(el.scrollHeight - (el.scrollTop + el.clientHeight))
   if (dis < range) {

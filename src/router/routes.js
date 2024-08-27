@@ -52,7 +52,7 @@ const routes = [
     name: 'blogDetail',
     path: '/blog/:id',
     meta: { title: '文章详情' },
-    component: getPageComponent(() => import('@/views/Blog/index.vue'))
+    component: getPageComponent(() => import('@/views/Blog/Detail.vue'))
   },
   {
     name: 'message',
